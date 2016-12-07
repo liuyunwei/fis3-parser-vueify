@@ -1,18 +1,21 @@
-var __vueify_style_dispose__ = require("./insert-css").insert("<%%>");
+;<%
+if(!options.extractCss){%>
+var __vueify_style_dispose__ = require("./insert-css").insert("<%=data.styles.reduce(function(a,b){ return a + '\n'+ JSON.stringify(b.content);}, "")%>");
+<%}%>
 
 (function(){
-	<%=data.script%>
-
+	<%=data.script.content%>
 })();
 
 if (module.exports.__esModule) module.exports = module.exports.default
 
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports);
-<%if(data.hasTemplate) {%>
+<%if(data.template.content) {%>
 if (__vue__options__.functional) {console.warn("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = <%=data.render%>;
-__vue__options__.staticRenderFns = <%=data.staticRenderFns%>;
+__vue__options__.render = <%=data.template.render%>;
+__vue__options__.staticRenderFns = <%=data.template.staticRenderFns%>;
+//__vue__options__.template = <%=JSON.stringify(data.template.content)%>;
 <%}%>
-<%if(data.scopeId){%>
-__vue__options__._scopeId = "<%=data.scopeId%>";
+<%if(scopeId){%>
+__vue__options__._scopeId = "<%=scopeId%>";
 <%}%>
