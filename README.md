@@ -1,7 +1,7 @@
 # fis3-parser-vueify
 parse the .vue file for fis3
 
-**NOTE: 还在开发中，请不要使用
+**NOTE: 还在开发中，请不要使用，暂时仅支持vue2
 
 ##用途
 >使用fis3作为构建工具时，用来解析 .vue的文件，作为一个parser plugin。
