@@ -14,7 +14,7 @@ var __vue__options__ = (typeof module.exports === "function"? module.exports.opt
 if (__vue__options__.functional) {console.warn("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = <%=data.template.render%>;
 __vue__options__.staticRenderFns = <%=data.template.staticRenderFns%>;
-//__vue__options__.template = <%=JSON.stringify(data.template.content)%>;
+
 <%}%>
 <%if(scopeId){%>
 __vue__options__._scopeId = "<%=scopeId%>";
