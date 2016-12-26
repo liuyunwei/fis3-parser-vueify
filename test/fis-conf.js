@@ -27,7 +27,6 @@ fis.hook('node_modules');
 fis.match('**.js', {
   isMod: true,
   rExt: 'js',
-  useHash:true,
   useSameNameRequire: true
 });
 
@@ -69,7 +68,7 @@ fis.match('src/{**.vue:less,**.less}', {
 fis.match('src/{**.vue:scss,**.scss}', {
   rExt: 'css',
   parser: [fis.plugin('node-sass')],
-  postprocessor: fis.plugin('autoprefixer'),
+  postprocessor: fis.plugin('autoprefixer')
 });
 
 // 发布
@@ -113,6 +112,12 @@ fis.match('::package', {
 });
 
 fis.media("production")
+  .match("**", {
+    useHash: true
+  })
+  .match("/src/html/**", {
+    useHash: false
+  })
   .match('::package', {
   
    packager: fis.plugin('deps-pack', {
@@ -127,7 +132,8 @@ fis.media("production")
         'src/js/page/index.js',
         'src/js/page/index.js:deps', // 以及其所有依赖
       ]
-    })
+    }),
+   useHash: true
 });
 // 部署
 fis
