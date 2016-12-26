@@ -35,7 +35,9 @@ fis.match('src/**.vue', {
   isMod: true,
   rExt: 'js',
   useSameNameRequire: true,
-  parser: vueify  //parserVuePlugin
+  parser: fis.plugin(vueify, {
+    extractCss: false
+  })  //parserVuePlugin
 });
 
 

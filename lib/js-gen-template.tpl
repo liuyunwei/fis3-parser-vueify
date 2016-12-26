@@ -1,6 +1,6 @@
 ;<%
 if(data.styles && data.styles.length > 0 && !options.extractCss){%>
-var __vueify_style_dispose__ = require("./insert-css").insert("<%=data.styles.reduce(function(a,b){ return a + '\n'+ JSON.stringify(b.content);}, "")%>");
+var __vueify_style_dispose__ = require("vueify-insert-css").insert(<%=JSON.stringify(data.styles.reduce(function(a,b){ return a + '\n'+ b.content;}, ""))%>);
 <%}%>
 <%if(data.script && data.script.content){%>
 (function(){
