@@ -36,7 +36,7 @@ fis.match('src/**.vue', {
   rExt: 'js',
   useSameNameRequire: true,
   parser: fis.plugin(vueify, {
-    extractCss: false
+    //extractCss: false // 默认是将css抽取出来的，这里是插入为style
   })  //parserVuePlugin
 });
 
@@ -114,11 +114,19 @@ fis.match('::package', {
 });
 
 fis.media("production")
-  .match("**", {
+  .match("*.{js,jsx,vue}", {
+    useHash: true,
+    optimizer: fis.plugin('uglify-js')
+  })
+  .match("*.{css,less,scss}", {
+    useHash: true,
+    optimizer: fis.plugin('clean-css')
+  })
+  .match("::image", {
     useHash: true
   })
-  .match("/src/html/**", {
-    useHash: false
+  .match("*.png",{
+     optimizer: fis.plugin('png-compressor')
   })
   .match('::package', {
   
@@ -134,8 +142,7 @@ fis.media("production")
         'src/js/page/index.js',
         'src/js/page/index.js:deps', // 以及其所有依赖
       ]
-    }),
-   useHash: true
+    })
 });
 // 部署
 fis

@@ -4,7 +4,10 @@
   "description": "",
   "main": "null",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "fis3 server start && fis3 release -c",
+    "dev": "fis3 release",
+    "build-release": "fis3 release production -c",
+    "build": "fis3 release production -cd output"
   },
   "author": "",
   "license": "ISC",
