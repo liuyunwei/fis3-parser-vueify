@@ -1,6 +1,6 @@
 {
   "name": "fis3-parser-vueify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "the parser of .vue file for fis3",
   "main": "index.js",
   "scripts": {
