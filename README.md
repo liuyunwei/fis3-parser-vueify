@@ -22,4 +22,58 @@ parse the .vue file for fis3
 * fis3-parser-vue-component对css scoped管理采用手动的替换方式，与原设计开发存在差异
 * 支持jsx的render
 
+##快速使用
 
+ - npm install --save-dev fis3-parser-vueify
+ - 在fis-conf.js中加入
+
+    
+
+```js
+fis.match('src/**.vue', {
+  isMod: true,
+  rExt: 'js',
+  useSameNameRequire: true,
+  parser: fis.plugin(vueify, {
+    //extractCss: false //默认是将css抽取出来的,
+  })  
+});
+  
+```
+- 更多与fis相关的内容可以参考代码中的test目录，为测试项目，并结合fis的文档。
+
+
+## 插件配置项
+
+### extractCss {boolean}
+
+	是否将css文件抽取为单独的文件。true （抽出）， false（内联）。默认值为true，如果需要内联，请配置为false。
+	建议抽出，更好的利用静态文件的缓存。
+	> 如果需要内联时，项目需要依赖 vueify-insert-css。所以需要在项目根目录中 ` npm install --save vueify-insert-css `
+
+### jsGenTemplateContent
+	生成js文件的模板，用以覆盖文件/lib/js-gen-template.tpl中的内容。多数情况下不需要配置该内容，高级用法。
+	用的是underscore的模板语法，具体编译结果提供的数据包含以下内容，
+	```js
+	{
+		data: {
+				styles: [{
+					content: ''
+					}],
+				script: {
+					content: ''
+					},
+				template:{
+					staticRenderFns: '',
+					render: ''
+				}
+			},
+		scopeId: "data-v-dsfdsfads"
+	}
+	```
+
+### scopeIdPrefix
+	scopeId的前缀，默认为 data-v
+
+### genIdFunction
+	生成scopeId的方法，此方法接受filePath作为参数
