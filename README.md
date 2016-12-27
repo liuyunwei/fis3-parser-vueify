@@ -24,8 +24,8 @@ parse the .vue file for fis3
 
 ##快速使用
 
- - npm install --save-dev fis3-parser-vueify
- - 在fis-conf.js中加入
+ - `npm install --save-dev fis3-parser-vueify`
+ - 在`fis-conf.js`中加入
 
     
 
@@ -47,7 +47,7 @@ fis.match('src/**.vue', {
 
 ### extractCss {boolean}
 
-	是否将css文件抽取为单独的文件。true （抽出）， false（内联）。默认值为true，如果需要内联，请配置为false。
+	是否将css文件抽取为单独的文件。`true` （抽出）， `false`（内联）。默认值为`true`，如果需要内联，请配置为`false`。
 	建议抽出，更好的利用静态文件的缓存。
 	> 如果需要内联时，项目需要依赖 vueify-insert-css。所以需要在项目根目录中 ` npm install --save vueify-insert-css `
 
@@ -58,22 +58,26 @@ fis.match('src/**.vue', {
 	{
 		data: {
 				styles: [{
-					content: ''
+					content: '' //编译后的css的内容
 					}],
 				script: {
-					content: ''
+					content: '' //编译后的js内容
 					},
-				template:{
-					staticRenderFns: '',
+				template:{  //vue编译后的模板函数内容
+					staticRenderFns: '', 
 					render: ''
 				}
 			},
+		options: {
+			//这里包含了所有配置项，如 extractCss。并且包括用户自己传入的配置
+		},
 		scopeId: "data-v-dsfdsfads"
 	}
 	```
 
 ### scopeIdPrefix
-	scopeId的前缀，默认为 data-v
+	scopeId的前缀，默认为 `data-v-`
 
 ### genIdFunction
-	生成scopeId的方法，此方法接受filePath作为参数
+	生成scopeId的方法，此方法接受filePath作为参数。默认为`/lib/gen-id.js`。
+	因为scopeId将会影响编译css的内容，从而影响css文件最终的md5签名。所以此处的函数最好是纯函数，以更好地利用缓存。bad case：用文件了列表编号作为id，这不是个好的方式，添加删除文件时就会引起其他不相干文件的编号改变。
