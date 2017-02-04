@@ -30,6 +30,7 @@ parse the .vue file for fis3
     
 
 ```js
+var vueify = require("fis3-parser-vueify");
 fis.match('src/**.vue', {
   isMod: true,
   rExt: 'js',
