@@ -71,6 +71,7 @@ fis.match('src/**.vue', {
 	options: {
 		//这里包含了所有配置项，如 extractCss。并且包括用户自己传入的配置
 	},
+	hasScopeStyle: true, //组件内是否包含有scoped的style的标签
 	scopeId: "data-v-dsfdsfads"
 }
 ```
