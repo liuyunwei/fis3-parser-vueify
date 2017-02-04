@@ -17,6 +17,6 @@ __vue__options__.render = <%=data.template.render%>;
 __vue__options__.staticRenderFns = <%=data.template.staticRenderFns%>;
 
 <%}%>
-<%if(scopeId){%>
+<%if(hasScopeStyle){%>
 __vue__options__._scopeId = "<%=scopeId%>";
 <%}%>
